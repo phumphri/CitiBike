@@ -1,0 +1,83 @@
+body.banner
+{
+    background-color: #fffff0;  /* Ivory */
+    font-family: Verdana, Geneva, sans-serif
+}
+
+body
+{
+    background-color: #fffff0;  /* Ivory */
+    font-family: Verdana, Geneva, sans-serif
+}
+
+h1, h2, h3, h4 {color: #990000;}  /* Cardinal */
+
+div.cardinal {background-color: #990000;}  /* Cardinal */
+
+button.cardinal {color: #990000;}  /* Cardinal */
+
+button.background-cardinal {background-color: #990000;}  /* Cardinal */
+
+iframe.banner
+{
+    border-color: transparent ;
+    background-color: #fffff0;  /* Ivory */
+}
+
+iframe 
+{
+    border-color: transparent ;
+}
+
+table
+{
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent;
+    border-collapse: collapse;
+    background-color: #fffff0;  /* Ivory */
+    font-size: 9pt
+}
+
+th
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: transparent;
+    vertical-align: middle;
+    padding: 5px
+}
+
+td
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: transparent;
+    vertical-align: top;
+    padding: 5px
+}
+
+li
+{
+    padding-top: 5px;
+}
+
+textarea.hidetext {color: White}
+
+textarea.showtext {color: Black}
+
+textarea.hide {visibility: hidden}
+
+a.show {visibility: visible}
+
+a.hide {visibility: hidden}
+
+h3.show {visibility: visible}
+
+h3.hide {visibility: hidden}
+
+ul.show {visibility: visible}
+
+ul.hide {visibility: hidden}
+
+
