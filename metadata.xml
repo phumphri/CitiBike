@@ -78,6 +78,20 @@
                 <Property Name="trips" Type="Edm.Int32" Nullable="false" />
             </EntityType>
 
+            <EntityType Name="age_minute_by_year_month_day">
+                <Key>
+                    <PropertyRef Name="trip_year" />
+                    <PropertyRef Name="trip_month" />
+                    <PropertyRef Name="trip_day" />
+                    <PropertyRef Name="age" />
+                </Key>
+                <Property Name="trip_year" Type="Edm.Int32" Nullable="false" />
+                <Property Name="trip_month" Type="Edm.Int32" Nullable="false" />
+                <Property Name="trip_day" Type="Edm.Int32" Nullable="false" />
+                <Property Name="age" Type="Edm.Int32" Nullable="false" />
+                <Property Name="trip_minutes" Type="Edm.Int32" Nullable="false" />
+            </EntityType>
+
             <EntityType Name="trip">
                 <Key>
                     <PropertyRef Name="start_time" />
@@ -88,6 +102,7 @@
             </EntityType>
 
             <EntityContainer Name="Container">
+                <EntitySet Name="age_minutes_by_year_month_day" EntityType="age_minute_by_year_month_day" />
                 <EntitySet Name="gender_trips_by_year_month_day" EntityType="gender_trip_by_year_month_day" />
                 <EntitySet Name="stop_stations" EntityType="stop_station" />
                 <EntitySet Name="start_stations" EntityType="start_station" />
