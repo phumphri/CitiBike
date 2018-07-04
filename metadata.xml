@@ -53,6 +53,17 @@
                 <Property Name="trips" Type="Edm.Int32" Nullable="false" />
             </EntityType>
 
+            <EntityType Name="stop_station">
+                <Key>
+                    <PropertyRef Name="stop_station_id" />
+                </Key>
+                <Property Name="stop_station_id" Type="Edm.Int32" Nullable="false" />
+                <Property Name="stop_station_name" Type="Edm.String" Nullable="false" />
+                <Property Name="stop_station_latitude" Type="Edm.Double" Nullable="false" />
+                <Property Name="stop_station_longitude" Type="Edm.Double" Nullable="false" />
+                <Property Name="trips" Type="Edm.Int32" Nullable="false" />
+            </EntityType>
+
             <EntityType Name="trip">
                 <Key>
                     <PropertyRef Name="start_time" />
@@ -63,6 +74,7 @@
             </EntityType>
 
             <EntityContainer Name="Container">
+                <EntitySet Name="stop_stations" EntityType="stop_station" />
                 <EntitySet Name="start_stations" EntityType="start_station" />
                 <EntitySet Name="trips_by_year_month_day" EntityType="trip_by_year_month_day" />
                 <EntitySet Name="trips_by_year_season_hour" EntityType="trip_by_year_season_hour" />

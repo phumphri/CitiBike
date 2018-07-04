@@ -51,6 +51,90 @@ def metadata():  # pragma: no cover
         content = metadata_file.read()
         return Response(content, mimetype="text/xml")
 
+@app.route('/stop_stations', methods=['GET'])
+def stop_stations():
+
+    if request.method == 'GET':
+
+        conn = None
+        conn = connect_to_postgres()
+        if conn is None:
+            print("Database Connection Failed.")
+            return "Database Connection Failed"
+        else:
+            print("Database Connection Okay.")
+
+        sql = "select * from citibike.stop_stations"
+
+        try:
+            cur = conn.cursor()
+            print('Cursor okay.')
+
+            cur.execute(sql)
+            print('Execute Okay.')
+
+            table_data = cur.fetchall()
+            print("Fetch All Okay")
+
+            value_list = []
+
+
+            for table_entry_list in table_data:
+                table_entry_json = {}
+                table_entry_json["stop_station_id"] = table_entry_list[0]
+                table_entry_json["stop_station_name"] = table_entry_list[1]
+                table_entry_json["stop_station_latitude"] = table_entry_list[2]
+                table_entry_json["stop_station_longitude"] = table_entry_list[3]
+                table_entry_json["trips"] = table_entry_list[4]
+                value_list.append(table_entry_json)
+            
+            # Create json dictionary to hold metadata and table data.
+            json_dict = {}
+            json_dict["odata.metadata"] = "http://127.0.0.1:5000/$metadata#stop_stations"
+
+
+            # Add table_data to json dictionary.
+            json_dict["value"] = value_list
+
+            json_object = jsonify(json_dict)
+            print("jsonify Okay")
+            print(json_object)
+
+            # Experiment
+            # response = json.dumps(json_object)
+            # print(type(json.dumps(json_dict)))
+            # response = Response(json.dumps(json_object))
+
+            response = json_object
+            response.headers['Content-Type'] = "application/json; odata.metadata=minimal"
+            response.headers['OData-Version'] = "4.0"
+            response.headers['Cache-Control'] = "no-cache"
+            response.headers['Pragma'] = "no-cache"
+            response.headers['Vary'] = "Accept-Encoding"
+            response.headers['Expires'] = "-1"
+
+            return response
+
+        except Exception as e:
+            print('Execute Failed', str(e))
+            return str(e)
+
+        finally:
+            if conn is not None:
+                conn.close
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/start_stations', methods=['GET'])
 def start_stations():
 
@@ -122,19 +206,6 @@ def start_stations():
         finally:
             if conn is not None:
                 conn.close
- 
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
