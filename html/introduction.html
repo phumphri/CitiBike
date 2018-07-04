@@ -1,0 +1,122 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <link rel="stylesheet" type="text/css" href="viterbi.css" />
+</head>
+
+<body>
+    <div>
+        <h2>Summary</h2>
+
+        <img src="../images/citi-bike-station-bikes.jpg" alt="CitiBike Station Bikes">
+
+        <p>Based on bike trip data provided by citibike, the data was analyzed, searching for answers for the following questions.</p>
+
+        <ul>
+            <li>How many trips have been recorded total during the chosen period?</li>
+
+            <li>By what percentage has total ridership grown?</li>
+
+            <li>How has the proportion of short-term customers and annual subscribers changed?</li>
+
+            <li>What are the peak hours in which bikes are used during summer months?</li>
+
+            <li>What are the peak hours in which bikes are used during winter months?</li>
+
+            <li>Today, what are the top 10 stations in the city for starting a journey? (Based on data, why do you hypothesize
+                these are the top locations?)</li>
+
+        </ul>
+
+        <p>The answers were derived in a a four-step process.</p>
+        <ul>
+            <li>Data Acquisition</li>
+            <li>Data Modeling</li>
+            <li>Data Access</li>
+            <li>Data Visualization</li>
+        </ul>
+
+    </div>
+    <div>
+        <h2>Data Acquisition</h2>
+
+        <img src="../images/acquisition.png" alt="Data Acquisition">
+
+        <p>There are 60 archive files that yielded 60 csv files. </p>
+
+        <p>The resulting citibike.trips table contains nearly 60 million rows.</p>
+
+        <p>All files were processed that were in C:/citibike directory. </p>
+
+        <p>Assumming all files were type csv, the ever evolving naming scheme for the files had no effect.</p>
+
+        <p>Some of the data cleansing done were:</p>
+        <ul>
+            <li>Data that would normally hold type integer data where converted to type integer. If the cast failed, the value
+                None was assigned.</li>
+            <li>Data that would normally hold text that had the value "NULL" were assigned the value None.</li>
+            <li>Key values for start_time and bike_id were required. </li>
+            <li>Records with duplicate keys were ignored.</li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>Data Modeling</h2>
+
+        <img src="../images/modeling.png" alt="Data Modeling">
+
+        <p>Loading the 60 csv files into a database allows access to all data. However, the database has nearly 60 million
+            rows.</p>
+
+        <p>Materialized views aggregate and store the data, thus greatly reducing the amount of data transmitted to a client
+            and avoiding processing time.</p>
+
+        <p>Not all aggregation is done with SQL. However, the "heavy lifting" is done in advance in the database to allow the
+            client to do further discovery.</p>
+
+        <p>The advantages of using materialized in Postgres:</p>
+        <ul>
+            <li>Fast perfomance, since the data is already aggregated.</li>
+            <li>Reduce the number of records to be transmitted to a client.</li>
+            <li>Use of the aggregation, windowing, and analytical functions in Postgres.</li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>Data Access</h2>
+
+        <img src="../images/access.png" alt="Data Access">
+
+        <p>An Application Programming Interface (API) was developed.</p>
+
+        <p>This API would read either a materialized view or a view and format a OData/JSON payload. The view objects applied
+            Postgres windowing to calculate percentages or eliminate duplicates.</p>
+
+        <p>A typical API would provision a JSON package with or without embedded metadata.</p>
+
+        <p>However, Tableau is different. It requires Open Data Protocol (OData). This a combination of a JSON payload and an
+            XML payload describing the JSON.</p>
+
+    </div>
+
+    <div>
+        <h2>Data Visualization</h2>
+
+        <img src="../images/visualization.png" alt="Data Visualization">
+
+        <p>All Tableau views were created using OData resources. </p>
+
+        <p>These OData resources were JSON payloads with the number of rows ranging from a low of 10 rows to as many as 3,814
+            rows. Since the data was already aggregated, response is immediate.</p>
+
+        <p>The Postgres database contained nearly 60 million rows.</p>
+        
+        <p>The system would fail if that much data were to be pushed
+            out to Tableau and having Tableau do the aggregation.</p>
+    </div>
+
+
+</body>
+
+</html>

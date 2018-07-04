@@ -41,7 +41,7 @@ Some of the data cleansing done were:
 * Data that would normally hold type integer data where converted to type integer.  If the cast failed, the value None was assigned.
 * Data that would normally hold text that had the value "NULL" were assigned the value None.
 * Key values for start_time and bike_id were required.  
-* Records with duplicate keys were ignoared.
+* Records with duplicate keys were ignored.
 
 ### Input Files
 Files provided by citibike (https://www.citibikenyc.com/system-data):
@@ -716,13 +716,13 @@ Files provided by citibike (https://www.citibikenyc.com/system-data):
 ## Data Modeling
 ![Data Modeling](images/modeling.png)
 
-Loading the sixty csv files into a database allows access to all data.  However, the database has nearly sixty million rows.
+Loading the 60 csv files into a database allows access to all data.  However, the database has nearly 60 million rows.
 
 Materialized views aggregate and store the data, thus greatly reducing the amount of data transmitted to a client and avoiding processing time.
 
 Not all aggregation is done with SQL.  However, the "heavy lifting" is done in advance in the database to allow the client to do further discovery.
 
-The advantances of using materialized in Postgres:
+The advantages of using materialized in Postgres:
 * Fast perfomance, since the data is already aggregated.
 * Reduce the number of records to be transmitted to a client.
 * Use of the aggregation, windowing, and analytical functions in Postgres.
