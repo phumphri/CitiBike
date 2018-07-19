@@ -51,6 +51,108 @@ def metadata():  # pragma: no cover
         content = metadata_file.read()
         return Response(content, mimetype="text/xml")
 
+
+@app.route('/trips_by_year_month', methods=['GET'])
+def trips_by_year_month():
+
+    if request.method == 'GET':
+
+        conn = None
+        conn = connect_to_postgres()
+        if conn is None:
+            print("Database Connection Failed.")
+            return "Database Connection Failed"
+        else:
+            print("Database Connection Okay.")
+
+        sql = "select * from citibike.trips_by_year_month order by trip_year, trip_month"
+
+        try:
+            cur = conn.cursor()
+            print('Cursor okay.')
+
+            cur.execute(sql)
+            print('Execute Okay.')
+
+            table_data = cur.fetchall()
+            print("Fetch All Okay")
+
+            # forecast code start
+
+            df = pd.DataFrame(table_data, columns=['Trip Year', 'Trip Month', 'Trip Month Name', 'Trips'])
+            
+            X = df[['Trip Year', 'Trip Month']]
+            print(X)
+
+            y = df[['Trips']]
+            print(y)
+
+
+
+            # forecast code end
+
+
+
+
+            value_list = []
+
+            for table_entry_list in table_data:
+                table_entry_json = {}
+                table_entry_json["trip_year"] = table_entry_list[0]
+                table_entry_json["trip_month"] = table_entry_list[1]
+                table_entry_json["trip_month_name"] = table_entry_list[2]
+                table_entry_json["trips"] = table_entry_list[3]
+                value_list.append(table_entry_json)
+            
+            # Create json dictionary to hold metadata and table data.
+            json_dict = {}
+            json_dict["odata.metadata"] = "http://127.0.0.1:5000/$metadata#trips_by_year_month"
+
+
+            # Add table_data to json dictionary.
+            json_dict["value"] = value_list
+
+            json_object = jsonify(json_dict)
+            print("jsonify Okay")
+            print(json_object)
+
+            # Experiment
+            # response = json.dumps(json_object)
+            # print(type(json.dumps(json_dict)))
+            # response = Response(json.dumps(json_object))
+
+            response = json_object
+            response.headers['Content-Type'] = "application/json; odata.metadata=minimal"
+            response.headers['OData-Version'] = "4.0"
+            response.headers['Cache-Control'] = "no-cache"
+            response.headers['Pragma'] = "no-cache"
+            response.headers['Vary'] = "Accept-Encoding"
+            response.headers['Expires'] = "-1"
+
+            return response
+
+        except Exception as e:
+            print('Execute Failed', str(e))
+            return str(e)
+
+        finally:
+            if conn is not None:
+                conn.close
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/age_minutes_by_year_month_day', methods=['GET'])
 def age_minutes_by_year_month_day():
 
@@ -98,7 +200,7 @@ def age_minutes_by_year_month_day():
 
             json_object = jsonify(json_dict)
             print("jsonify Okay")
-            print(json_object)
+            # print(json_object)
 
             # Experiment
             # response = json.dumps(json_object)
@@ -123,21 +225,6 @@ def age_minutes_by_year_month_day():
             if conn is not None:
                 conn.close
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @app.route('/gender_trips_by_year_month_day', methods=['GET'])
 def gender_trips_by_year_month_day():
@@ -401,7 +488,7 @@ def trips_by_year_season_hour():
             
             # Create json dictionary to hold metadata and table data.
             json_dict = {}
-            json_dict["odata.metadata"] = "http://127.0.0.1:5000/$metadata#Trips_by_Year_Season_Hour"
+            json_dict["odata.metadata"] = "http://127.0.0.1:5000/$metadata#trips_by_year_season_hour"
 
 
             # Add table_data to json dictionary.
@@ -476,7 +563,7 @@ def user_types_by_year_month_day():
             
             # Create json dictionary to hold metadata and table data.
             json_dict = {}
-            json_dict["odata.metadata"] = "http://127.0.0.1:5000/$metadata#User_Types_By_Year_Month_Day"
+            json_dict["odata.metadata"] = "http://127.0.0.1:5000/$metadata#user_types_by_year_month_day"
 
 
             # Add table_data to json dictionary.
@@ -550,7 +637,7 @@ def trips_by_year_month_day():
             
             # Create json dictionary to hold metadata and table data.
             json_dict = {}
-            json_dict["odata.metadata"] = "http://127.0.0.1:5000/$metadata#Trips_By_Year_Month_Day"
+            json_dict["odata.metadata"] = "http://127.0.0.1:5000/$metadata#trips_by_year_month_day"
 
 
             # Add table_data to json dictionary.
