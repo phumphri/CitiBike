@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <!-- <link rel="stylesheet" type="text/css" href="static/css/viterbi.css" /> -->
+    <title>CitiBike</title>
+    <link rel="shortcut icon" href="https://www.usc.edu/favicon.ico" />
+
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/viterbi.css') }}" />
+    <!-- <script src="{{ url_for('static', filename='js/sample.js') }}"></script> -->
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-2 cardinal project_name">
+                    <img src="https://vsoeapp1.vsoe.usc.edu/images/USC-Bar-cardinal.gif">
+            </div>
+            <div class="col-lg-8 cardinal project_name">
+                <center class="project_name">CitiBike</center>
+            </div>
+            <div class="col-lg-2 cardinal bootcamp_name">
+                <center>USC Viterbi Data Analytics Boot Camp</center>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 cardinal">
+                <center class="gold">Tiffany Gomez</center>
+            </div>
+            <div class="col-lg-3 cardinal">
+                <center class="gold">Mohammad Rahman</center>
+            </div>
+            <div class="col-lg-3 cardinal">
+                <center class="gold">Ritter Gustave</center>
+            </div>
+            <div class="col-lg-3 cardinal">
+                <center><a class="gold" target="_blank" href="https://www.linkedin.com/in/patrickhumphries/">Patrick Humphries</a></center>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-2 embed-responsive embed-responsive-4by3">
+                <iframe name="tocframe" class="embed-responsive-item" src="{{ url_for('static', filename='html/toc.html') }}">
+                </iframe>
+            </div>
+
+            <div class="col-lg-10 embed-responsive embed-responsive-16by9">
+                <iframe name="viewframe" class="embed-responsive-item" src="{{ url_for('static', filename='html/introduction.html') }}">
+                </iframe>
+            </div>
+
+        </div>
+    </div>
+
+</html>

@@ -26,6 +26,11 @@ import os.path
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def home():
+    # print(request.headers)
+    return render_template("index.html")
+
 def connect_to_postgres():
     hostname = socket.gethostname()
     print("socket.hostname():", hostname)
