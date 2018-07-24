@@ -3,6 +3,36 @@
     <edmx:DataServices>
         <Schema Namespace="Viterbi.Cloud.Citibike" xmlns="http://docs.oasis-open.org/odata/ns/edm">
 
+            <EntityType Name="seasonal_factor">
+                <Key>
+                    <PropertyRef Name="trip_year" />
+                    <PropertyRef Name="trip_month" />
+                </Key>
+                <Property Name="trip_month" Type="Edm.Int32" Nullable="false" />
+                <Property Name="trip_year" Type="Edm.Int32" Nullable="false" />
+                <Property Name="seasonal_factor" Type="Edm.Single" Nullable="false" />
+            </EntityType>
+
+            <EntityType Name="linear_regression">
+                <Key>
+                    <PropertyRef Name="trip_year" />
+                    <PropertyRef Name="trip_month" />
+                </Key>
+                <Property Name="trip_month" Type="Edm.Int32" Nullable="false" />
+                <Property Name="trip_year" Type="Edm.Int32" Nullable="false" />
+                <Property Name="trips" Type="Edm.Int32" Nullable="false" />
+            </EntityType>
+
+            <EntityType Name="forecast">
+                <Key>
+                    <PropertyRef Name="trip_year" />
+                    <PropertyRef Name="trip_month" />
+                </Key>
+                <Property Name="trip_month" Type="Edm.Int32" Nullable="false" />
+                <Property Name="trip_year" Type="Edm.Int32" Nullable="false" />
+                <Property Name="trips" Type="Edm.Int32" Nullable="false" />
+            </EntityType>
+
             <EntityType Name="trip_by_year_month_day">
                 <Key>
                     <PropertyRef Name="trip_year" />
@@ -102,6 +132,9 @@
             </EntityType>
 
             <EntityContainer Name="Container">
+                <EntitySet Name="forecasts" EntityType="forecast" />
+                <EntitySet Name="seasonal_factors" EntityType="seasonal_factor" />
+                <EntitySet Name="linear_regressions" EntityType="linear_regression" />
                 <EntitySet Name="age_minutes_by_year_month_day" EntityType="age_minute_by_year_month_day" />
                 <EntitySet Name="gender_trips_by_year_month_day" EntityType="gender_trip_by_year_month_day" />
                 <EntitySet Name="stop_stations" EntityType="stop_station" />

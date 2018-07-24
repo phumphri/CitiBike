@@ -122,7 +122,7 @@ def run(csvpath):
     json_string = json.dumps(json_dict)
 
 
-    # url = 'https://its-a-gas.herokuapp.com/domesticautos'  # Using app.py on Heroku, Postgres on AWS.
+    # url = 'https://humphries-citibike.herokuapp.com/domesticautos'  # Using app.py on Heroku, Postgres on AWS.
     url = 'http://127.0.0.1:5000/trips'            # Using app.py and Postgres locally.
 
     print("Calling requests.post(url, json_string).")

@@ -20,6 +20,9 @@ from flask import (
     redirect)
 from flask_cors import CORS
 import os.path
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from python import forecast_trips
 
 
 # Assigning the Flask framework.
@@ -40,6 +43,9 @@ def connect_to_postgres():
             conn = psycopg2.connect(os.environ['LOCAL_POSTGRES'])
             print('Connection okay.')
             return conn
+            # conn = psycopg2.connect(os.environ['AWS_POSTGRES'])
+            # print('Connection okay.')
+            # return conn
         elif (hostname == 'DESKTOP-S08TN4O'):  
             conn = psycopg2.connect(os.environ['LOCAL_POSTGRES'])
             print('Connection okay.')
@@ -57,6 +63,107 @@ def metadata():  # pragma: no cover
     with open('metadata.xml', 'r') as metadata_file:
         content = metadata_file.read()
         return Response(content, mimetype="text/xml")
+
+@app.route('/forecasts', methods=['GET'])
+def forecasts():
+
+    if request.method == 'GET':
+
+        try:
+            json_dict = forecast_trips.get_forecasts()
+
+            json_object = jsonify(json_dict)
+            print("jsonify Okay")
+            print(json_object)
+
+            # Experiment
+            # response = json.dumps(json_object)
+            # print(type(json.dumps(json_dict)))
+            # response = Response(json.dumps(json_object))
+
+            response = json_object
+            response.headers['Content-Type'] = "application/json; odata.metadata=minimal"
+            response.headers['OData-Version'] = "4.0"
+            response.headers['Cache-Control'] = "no-cache"
+            response.headers['Pragma'] = "no-cache"
+            response.headers['Vary'] = "Accept-Encoding"
+            response.headers['Expires'] = "-1"
+
+            print('Forecasts Okay')
+
+            return response
+
+        except Exception as e:
+            print('Forecasts Failed', str(e))
+            return str(e)
+
+@app.route('/seasonal_factors', methods=['GET'])
+def seaonal_factors():
+
+    if request.method == 'GET':
+
+        try:
+            json_dict = forecast_trips.get_seasonal_factors()
+
+            json_object = jsonify(json_dict)
+            print("jsonify Okay")
+            print(json_object)
+
+            # Experiment
+            # response = json.dumps(json_object)
+            # print(type(json.dumps(json_dict)))
+            # response = Response(json.dumps(json_object))
+
+            response = json_object
+            response.headers['Content-Type'] = "application/json; odata.metadata=minimal"
+            response.headers['OData-Version'] = "4.0"
+            response.headers['Cache-Control'] = "no-cache"
+            response.headers['Pragma'] = "no-cache"
+            response.headers['Vary'] = "Accept-Encoding"
+            response.headers['Expires'] = "-1"
+
+            print('Seasonal Factors Okay')
+
+            return response
+
+        except Exception as e:
+            print('Seasonal Factors Failed', str(e))
+            return str(e)
+
+@app.route('/linear_regressions', methods=['GET'])
+def linear_regressions():
+
+    if request.method == 'GET':
+
+        try:
+            json_dict = forecast_trips.get_linear_regression()
+
+            json_object = jsonify(json_dict)
+            print("jsonify Okay")
+            print(json_object)
+
+            # Experiment
+            # response = json.dumps(json_object)
+            # print(type(json.dumps(json_dict)))
+            # response = Response(json.dumps(json_object))
+
+            response = json_object
+            response.headers['Content-Type'] = "application/json; odata.metadata=minimal"
+            response.headers['OData-Version'] = "4.0"
+            response.headers['Cache-Control'] = "no-cache"
+            response.headers['Pragma'] = "no-cache"
+            response.headers['Vary'] = "Accept-Encoding"
+            response.headers['Expires'] = "-1"
+
+            print('Linear Regression Okay')
+
+            return response
+
+        except Exception as e:
+            print('Linear Regression Failed', str(e))
+            return str(e)
+
+
 
 
 @app.route('/trips_by_year_month', methods=['GET'])
@@ -93,13 +200,6 @@ def trips_by_year_month():
 
             y = df[['Trips']]
             print(y)
-
-
-
-            # forecast code end
-
-
-
 
             value_list = []
 
@@ -145,19 +245,6 @@ def trips_by_year_month():
         finally:
             if conn is not None:
                 conn.close
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @app.route('/age_minutes_by_year_month_day', methods=['GET'])
