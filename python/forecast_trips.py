@@ -87,7 +87,7 @@ df = pd.DataFrame(table_data, columns=['Trip Year', 'Trip Month', 'Trips'])
 # Trip Timestamp is needed for Tred and Seasonal decomposition.
 # df['Trip Timestamp'] = pd.to_datetime(df['Trip Year'].astype(str) + df['Trip Month'].astype(str), format='%Y%m')
 
-df['Time Stamp'] = None
+df['Time Stamp'] = pd.Series()
 for index, row in df.iterrows():
     df.loc[index, 'Trip Timestamp'] = datetime.strptime(df.loc[index, 'Trip Year'].astype(str) + df.loc[index, 'Trip Month'].astype(str), '%Y%m')
 
