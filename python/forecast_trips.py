@@ -81,7 +81,7 @@ finally:
 
 # Load selected data into a dataframe.
 df = pd.DataFrame(table_data, columns=['Trip Year', 'Trip Month', 'Trips'])
-
+df
 
 # Add Trip Timestamp based on Trip Year and Trip Month.
 # Trip Timestamp is needed for Tred and Seasonal decomposition.
