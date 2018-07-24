@@ -91,7 +91,6 @@ for index, row in df.iterrows():
     tm = df.loc[index, 'Trip Month'].astype(str)
     wtf = ty + tm
     df.loc[index, 'Trip Timestamp'] = pd.to_datetime(wtf, format="%Y%m")
-print(tm, type(tm), tm)
 
 
 # df['Trip Timestamp'] = pd.to_datetime(df['Trip Year'].astype(str) + df['Trip Month'].astype(str), format='%Y%m')
