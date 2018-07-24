@@ -23,6 +23,8 @@ from sklearn.linear_model import LinearRegression
 from statsmodels.tsa.seasonal import seasonal_decompose
 from datetime import datetime
 
+print('Start forecast_trips.py')
+
 # Connect to local Postgres database if working from workstation or laptop.
 # Otherwise connect to Postgres datase hosted by AWS/RDS.
 def connect_to_postgres():
