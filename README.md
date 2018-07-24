@@ -2,7 +2,7 @@
 
 ## Summary
 
-![Citi-Bikes](images/citi-bike-station-bikes.jpg)
+![Citi-Bikes](static/img/citi-bike-station-bikes.jpg)
 
 Based on bike trip data provided by citibike, the data was analyzed, searching for answers for the following questions.
 
@@ -27,7 +27,7 @@ The answers were derived in a a four-step process.
 These four steps are described in this document.
 
 ## Data Acquisition
-![Data Acquisition](images/acquisition.png)
+![Data Acquisition](static/img/acquisition.png)
 
 There are 60 archive files that yielded 60 csv files.  
 
@@ -714,7 +714,7 @@ Files provided by citibike (https://www.citibikenyc.com/system-data):
 </table>
 
 ## Data Modeling
-![Data Modeling](images/modeling.png)
+![Data Modeling](static/img/modeling.png)
 
 Loading the 60 csv files into a database allows access to all data.  However, the database has nearly 60 million rows.
 
@@ -728,7 +728,7 @@ The advantages of using materialized in Postgres:
 * Use of the aggregation, windowing, and analytical functions in Postgres.
 
 ## Data Access
-![Data Access](images/access.png)
+![Data Access](static/img/access.png)
 
 An Application Programming Interface (API) was developed.
 
@@ -740,7 +740,7 @@ A typical API would provision a JSON package with or without embedded metadata.
 However, Tableau is different.  It requires Open Data Protocol (OData).  This a combination of a JSON payload and an XML payload describing the JSON.
 
 ## Visualization
-![Data Visualization](images/visualization.png)
+![Data Visualization](static/img/visualization.png)
 
 All Tableau views were created using OData resources. 
  
