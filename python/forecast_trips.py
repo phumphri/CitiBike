@@ -86,11 +86,16 @@ df
 # Add Trip Timestamp based on Trip Year and Trip Month.
 # Trip Timestamp is needed for Tred and Seasonal decomposition.
 
+from datetime import datetime
 for index, row in df.iterrows():
     ty = df.loc[index, 'trip_year'].astype(str)
     tm = df.loc[index, 'trip_month'].astype(str)
     wtf = ty + tm
-    df.loc[index, 'trip_timestamp'] = pd.to_datetime(wtf, format="%Y%m")
+    # df.loc[index, 'trip_timestamp'] = pd.to_datetime(wtf, format="%Y%m")
+
+
+    
+    df.loc[index, 'trip_timestamp'] = datetime(df.loc[index, 'trip_year'], df.loc[index, 'trip_month'], 1)
 
 
 # df['Trip Timestamp'] = pd.to_datetime(df['Trip Year'].astype(str) + df['Trip Month'].astype(str), format='%Y%m')
