@@ -5,8 +5,8 @@
         <td>
             <img src="https://vsoeapp1.vsoe.usc.edu/images/USC-Bar-cardinal.gif">
         </td>
-        <td><span style="color:rgb(255, 199, 44); font-size:40px">CitiBike</span></td>
-        <td><span style="color:rgb(255, 199, 44)">Patrick Humphries, M.B.A.<br/>
+        <td><span style="color:rgb(255, 199, 44); font-size:40px; background-color:rgb(157, 34, 53)">CitiBike</span></td>
+        <td><span style="color:rgb(255, 199, 44); background-color:rgb(157, 34, 53))">Patrick Humphries, M.B.A.<br/>
             U.S.C. Graduate Student, Big Data Fundamentals<br/>
             pvhumphr@usc.edu</span>
         </td>
