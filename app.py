@@ -22,7 +22,7 @@ from flask_cors import CORS
 import os.path
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from python import forecast_trips
+import forecast_trips
 
 
 # Assigning the Flask framework.
@@ -33,6 +33,11 @@ CORS(app)
 def home():
     # print(request.headers)
     return render_template("index.html")
+
+@app.route("/index_xs")
+def index_xs():
+    # print(request.headers)
+    return render_template("index_xs.html")
 
 def connect_to_postgres():
     hostname = socket.gethostname()
